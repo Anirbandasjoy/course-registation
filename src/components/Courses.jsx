@@ -5,7 +5,8 @@ import Course from './Course'
 
 const Courses = () => {
     const [courseData, setCourseData] = useState([]);
-    const [selectedCourse, setSelectedCourse] = useState([])
+    const [selectedCourse, setSelectedCourse] = useState([]);
+    const [credit, setCredit] = useState(0);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -24,17 +25,28 @@ const Courses = () => {
         fetchData();
     }, []);
 
+
     const handelClickEvent = (course) => {
         const isCourseAlreadyExist = selectedCourse.find((c) => c.id === course.id);
-
         if (isCourseAlreadyExist) {
             toast.error("Course already added");
-        } else {
-            toast.success("Course added");
-            setSelectedCourse([...selectedCourse, course]);
+
+        }
+
+        else {
+            const newremaining = credit + course.Credit;
+            if (newremaining > 5) {
+                toast.error("Credit over")
+            }
+            else {
+                setCredit(newremaining)
+                toast.success("Course added");
+                setSelectedCourse([...selectedCourse, course]);
+            }
+
         }
     }
-
+    console.log(credit)
     return (
         <div className='flex flex-col sm:flex-row justify-center gap-4'>
 
@@ -56,7 +68,7 @@ const Courses = () => {
                     }
                 </div>
                 <div className='h-[1px] w-full my-4 bg-gray-200'></div>
-                <h2 className='font-semibold'>Total Credit Hour : 13</h2>
+                <h2 className='font-semibold'>Total Credit Hour : {credit}</h2>
 
             </div>
         </div>

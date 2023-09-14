@@ -52,7 +52,7 @@
     "title": "AWS, Cloud Computing",
     "description": "Discover the power of AWS and cloud computing. Get hands-on experience with cloud services, deployment, and scaling. Learn how to build and manage applications in the cloud.",
     "price": 35000,
-    "Credit": 5,
+    "Credit": 6,
     "image": "https://i.ibb.co/Tc8bj8J/Rectangle-3-1.png"
   },
   {
@@ -68,7 +68,7 @@
     "title": "Problem-Solving Part",
     "description": "Enhance your problem-solving skills with this course. Practice solving coding challenges, algorithmic problems, and logical puzzles. Sharpen your analytical thinking.",
     "price": 23000,
-    "Credit": 2,
+    "Credit": 5,
     "image": "https://i.ibb.co/51pLTpv/Rectangle-2-6.png"
   }
 ]
