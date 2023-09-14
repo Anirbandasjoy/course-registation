@@ -7,6 +7,7 @@ const Courses = () => {
     const [courseData, setCourseData] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [credit, setCredit] = useState(0);
+    const [remaining, setRemaining] = useState(20);
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -28,25 +29,24 @@ const Courses = () => {
 
     const handelClickEvent = (course) => {
         const isCourseAlreadyExist = selectedCourse.find((c) => c.id === course.id);
+
         if (isCourseAlreadyExist) {
             toast.error("Course already added");
+        } else {
+            const newCredit = credit + course.Credit;
 
-        }
-
-        else {
-            const newremaining = credit + course.Credit;
-            if (newremaining > 5) {
-                toast.error("Credit over")
-            }
-            else {
-                setCredit(newremaining)
+            if (newCredit > 20) {
+                toast.error("Credit limit exceeded");
+            } else {
+                const newRemaining = 20 - newCredit;
+                setCredit(newCredit);
+                setRemaining(newRemaining);
                 toast.success("Course added");
                 setSelectedCourse([...selectedCourse, course]);
             }
-
         }
     }
-    console.log(credit)
+
     return (
         <div className='flex flex-col sm:flex-row justify-center gap-4'>
 
@@ -57,7 +57,7 @@ const Courses = () => {
             </div>
 
             <div className='w-full sm:w-1/4  shadow-xl h-fit p-5 rounded-md' >
-                <h1 className='text-[#2F80ED] text-lg font-semibold'>Credit Hour Remaining 7 hr</h1>
+                <h1 className='text-[#2F80ED] text-lg font-semibold'>Credit Hour Remaining {remaining} hr</h1>
                 <div className='h-[1px] w-full my-4 bg-gray-400'></div>
                 <h1 className='text-xl font-semibold'>Course Name</h1>
                 <div className='mt-6 ml-4 list-decimal space-y-3'>
