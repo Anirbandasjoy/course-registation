@@ -1,47 +1,28 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import toast from "react-hot-toast"
 import Course from './Course'
 
+const Courses = ({ courseData }) => {
 
-const Courses = () => {
-    const [courseData, setCourseData] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState([]);
     const [credit, setCredit] = useState(0);
     const [remaining, setRemaining] = useState(20);
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await fetch("./data.json");
-                if (!res.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await res.json();
-                setCourseData(data);
-
-            } catch (error) {
-                console.error(error.message);
-            }
-        };
-
-        fetchData();
-    }, []);
-
 
     const handelClickEvent = (course) => {
         const isCourseAlreadyExist = selectedCourse.find((c) => c.id === course.id);
 
         if (isCourseAlreadyExist) {
-            toast.error("Course already added");
+            toast.error("course already added");
         } else {
             const newCredit = credit + course.Credit;
 
             if (newCredit > 20) {
-                toast.error("Credit limit exceeded");
+                toast.error("credit limit exceeded");
             } else {
                 const newRemaining = 20 - newCredit;
                 setCredit(newCredit);
                 setRemaining(newRemaining);
-                toast.success("Course added");
+                toast.success("course added");
                 setSelectedCourse([...selectedCourse, course]);
             }
         }
