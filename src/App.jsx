@@ -23,7 +23,6 @@ const App = () => {
       }
     };
     setTimeout(() => {
-
       fetchData();
     }, 2000);
   }, []);
